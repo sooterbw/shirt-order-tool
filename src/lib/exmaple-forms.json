@@ -1,0 +1,49 @@
+{
+    "options": {
+        "sizes": {
+            "youth": [
+                "small", "medium", "large"
+            ],
+            "adult": [
+                "small", "medium", "large",
+                "XL", "XXL", "XXXL"
+            ]
+        },
+        "types": [
+            {
+                "name": "Long Sleeve",
+                "price": 18
+            },
+            {
+                "name": "Short Sleeve",
+                "price": 14
+            }
+        ]
+    },
+    "forms": [
+        {
+            "name": "Example Form",
+            "orders": [
+                {
+                    "name": "John Doe",
+                    "order": {
+                        "adult": {
+                            "small": 1,
+                            "medium": 2
+                        }
+                    }
+                },
+                {
+                    "name": "Jill Johnson",
+                    "order": {
+                        "adult": {
+                            "small": 1,
+                            "medium": 2,
+                            "XL": 1
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
