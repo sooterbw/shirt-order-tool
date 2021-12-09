@@ -26,6 +26,9 @@ a:visited {
 
 label {
 	display: block;
+	font-weight: 500;
+	padding-left: .2em;
+	padding-bottom: .5em;
 }
 
 input, button, select, textarea {
@@ -33,17 +36,16 @@ input, button, select, textarea {
 	font-size: inherit;
 	-webkit-padding: 0.4em 0;
 	padding: 0.4em;
-	margin: 0 0 0.5em 0;
 	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+	border: 0px solid #ccc;
+	border-radius: 10px;
 }
 
 input:disabled {
 	color: #ccc;
 }
 
-input:focus {
+input:focus, select:focus, select:active {
 	outline-color: rgba(91, 33, 182);
 }
 
@@ -55,11 +57,22 @@ button {
 	align-items: center;
 	width: fit-content;
 	color: rgba(91, 33, 182);
-	background-color: #f4f4f4;
+	background-color: white;
 	outline: none;
 	border-radius: 10px;
 	border-width: 0;
 	cursor: pointer;
+}
+
+.submit {
+	background-color: rgba(91, 33, 182);
+	color: white;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+
+.submit:hover {
+	background-color: rgb(124, 58, 237);
 }
 
 button:hover {

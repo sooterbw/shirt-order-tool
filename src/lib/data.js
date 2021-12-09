@@ -3,18 +3,13 @@ const fs = require('fs');
 let appData = process.env.APPDATA + '/t-forms';
 let dataFile = appData + '/forms.json'
 
-
 let exampleForm = {
     "options": {
-        "sizes": {
-            "youth": [
-                "small", "medium", "large"
-            ],
-            "adult": [
-                "small", "medium", "large",
-                "XL", "XXL", "XXXL"
-            ]
-        },
+        "sizes": [
+            "YS", "YM", "YL",
+            "AS", "AM", "AL",
+            "AXL", "AXXL", "AXXXL"
+        ],
         "types": [
             {
                 "name": "Long Sleeve",
@@ -32,48 +27,59 @@ let exampleForm = {
             "orders": [
                 {
                     "name": "John Doe",
-                    "order": {
-                        "adult": {
-                            "small": 1,
-                            "medium": 2
+                    "order": [
+                        {
+                            "quantity": 1,
+                            "type": "Long Sleeve",
+                            "size": "AS"
+                        },
+                        {
+                            "quantity": 2,
+                            "type": "Long Sleeve",
+                            "size": "AL"
                         }
-                    }
+                    ]
                 },
                 {
                     "name": "Jill Johnson",
-                    "order": {
-                        "adult": {
-                            "small": 1,
-                            "medium": 2,
-                            "XL": 1
-                        }
-                    }
+                    "order": [
+                        {
+                            "quantity": 1,
+                            "type": "Long Sleeve",
+                            "size": "YS"
+                        },
+                        {
+                            "quantity": 2,
+                            "type": "Long Sleeve",
+                            "size": "AL"
+                        },
+                        {
+                            "quantity": 1,
+                            "type": "Long Sleeve",
+                            "size": "AXL"
+                        },
+                    ]
                 }
             ]
         }
     ]
 }
 
-export function checkData () {
+export function getFormData () {
+    let data = JSON.stringify(exampleForm);
     if (!fs.existsSync(appData)) {
         fs.mkdirSync(appData)
     }
     if (!fs.existsSync(dataFile)) {
-        let data = JSON.stringify(exampleForm);
         fs.writeFile(dataFile, data, "utf-8", (error, data) => {
             if(error) {
                 console.error("error: " + error)
             }
         })
-    }
-}
-
-export function getFormData() {
-    let data = {};
-    if (fs.existsSync(dataFile)) {
+    } else {
         data = fs.readFileSync(dataFile, {encoding:'utf-8'});
     }
-    return data;
+    return JSON.parse(data)
 }
 
 export function updateFormData(data) {

@@ -1,11 +1,25 @@
 <script>
     import { formData } from "../stores.js";
 
-    $:forms = $formData.forms
+	let selectedForm;
 
-    export let index;
+	$: {
+		selectedForm = $formData.forms.filter((form) => {
+			return form.active == true;
+		})[0]
+	}
 </script>
 
-<div>
-    {forms[index].orders}
+<div class="cell">
+    {selectedForm.orders}
 </div>
+
+<style>
+    .cell {
+        padding: 2em;
+        margin: 1em 2em 1em 2em;
+        min-height: calc(100% - 6em);
+        background-color: rgb(209, 213, 219);
+        border-radius: 10px;
+    }
+</style>

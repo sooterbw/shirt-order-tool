@@ -3,35 +3,54 @@
 	import OrderTable from './lib/components/OrderTable.svelte';
 	import OrderOverview from './lib/components/OrderOverview.svelte';
 	import NewOrder from './lib/components/NewOrder.svelte';
+	import { formData } from "./lib/stores.js";
+
+	let selectedForm;
+
+	$: {
+		selectedForm = $formData.forms.filter((form) => {
+			return form.active == true;
+		})[0]
+	}
+
 </script>
 
 <main>
 	<div>
 		<FormList />
 	</div>
+	{#if selectedForm}
 	<div class="main-container">
-		<div><NewOrder index=0/></div>
-		<div><OrderOverview index=0/></div>
-		<div><OrderTable index=0/></div>
+		<div class="span-1"><NewOrder /></div>
+		<div class="span-1"><OrderOverview /></div>
+		<div class="span-2"><OrderTable /></div>
 	</div>
+	{/if}
 </main>
 
 <style>
 	main {
 		position: relative;
 		display: flex;
+		max-height: 100vh;
 	}
 
 	.main-container {
-		display: flex;
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-auto-flow: row;
 		flex-direction: column;
+		height: 100%;
 		width: 100%;
-		padding-left: 2em;
 	}
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
+	.span-1 {
+		height: 50vh;
+		width: 100%;
+	}
+
+	.span-2 {
+		height: 50vh;
+		grid-column: span 2;
 	}
 </style>

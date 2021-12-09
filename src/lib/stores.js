@@ -1,4 +1,4 @@
 import { writable } from "svelte/store";
 import { getFormData } from "./data.js";
 
-export const formData = writable(JSON.parse(getFormData()));
+export const formData = writable(getFormData());

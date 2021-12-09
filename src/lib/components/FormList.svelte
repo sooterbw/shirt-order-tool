@@ -86,8 +86,7 @@
     }
 
     label {
-        font-weight: 700;
-        padding-bottom: 1em;
+        font-weight: 500;
     }
 
     .new-form-button {
@@ -159,6 +158,7 @@
 
     .modal-mask {
         position:absolute;
+        overflow: hidden;
         top: 0;
         left: 0;
         z-index: 10;
