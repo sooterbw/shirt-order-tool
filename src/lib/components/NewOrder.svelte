@@ -1,5 +1,6 @@
 <script>
     import { formData } from "../stores.js";
+    import { updateFormData } from "../data";
 
 	let selectedForm;
     let order = [];
@@ -14,7 +15,13 @@
     function addRow(row) {
         order.push(row)
         console.log(order)
+        order = order
         orderRow = {};
+    }
+
+    function handleSubmit() {
+        $formData[selectedForm]
+        updateFormData($formData)
     }
 </script>
 
@@ -22,7 +29,7 @@
     <div class="heading">
         <h3>New Order</h3>
     </div>
-    <form>
+    <form on:submit|preventDefault={handleSubmit}>
         <div class="form-field">
             <label for="">Customer Name</label>
             <input type="text" required>
@@ -30,13 +37,21 @@
         <table>
             <thead>
                 <tr>
-                    <th>qty</th>
-                    <th>type</th>
-                    <th>size</th>
+                    <th class="qty">qty</th>
+                    <th class="type">type</th>
+                    <th class="size">size</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
+                {#if order.length < 1}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                {:else}
                 {#each order as row, i}
                 <tr>
                     <td>{order[i].quantity}</td>
@@ -45,36 +60,38 @@
                     <td></td>
                 </tr>
                 {/each}
-                <tr>
-                    <td>
-                        <input type="number" min="0" bind:value={orderRow.quantity}>
-                    </td>
-                    <td>
-                        <select bind:value={orderRow.type}>
-                            <option value="" default></option>
-                            {#each $formData.options.types as type, i}
-                            <option value="{type.name}">{type.name}</option>
-                            {/each}
-                        </select>
-                    </td>
-                    <td>
-                        <select bind:value={orderRow.size}>
-                            <option value="" default></option>
-                            {#each $formData.options.sizes as size, i}
-                            <option value="{size}">{size}</option>
-                            {/each}
-                        </select>
-                    </td>
-                    <td>
-                        <div class="submit" on:click="{() => addRow(orderRow)}">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                            </svg>
-                        </div>
-                    </td>
-                </tr>
+                {/if}
             </tbody>
         </table>
+            <div class="inputs">
+                <div>
+                    <input class="qty" type="number" min="0" bind:value={orderRow.quantity}>
+                </div>
+                <div>
+                    <select class="type" bind:value={orderRow.type}>
+                        <option value="" default></option>
+                        {#each $formData.options.types as type, i}
+                        <option value="{type.name}">{type.name}</option>
+                        {/each}
+                    </select>
+                </div>
+                <div>
+                    <select class="size" bind:value={orderRow.size}>
+                        <option value="" default></option>
+                        {#each $formData.options.sizes as size, i}
+                        <option value="{size}">{size}</option>
+                        {/each}
+                    </select>
+                </div>
+                <div>
+                    <div class="submit" on:click="{() => addRow(orderRow)}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
         <button class="submit">
             Create
         </button>
@@ -87,7 +104,9 @@
     }
 
     table {
-        padding-top: 1em;
+        height: 250px;
+        overflow-y: scroll;
+        padding: 1em;
         width: 100%;
     }
 
@@ -98,11 +117,7 @@
     }
     
     tr {
-        height: 2em;
-    }
-
-    td {
-        height: 100%;
+        height: 1em;
     }
 
     button {
@@ -111,7 +126,7 @@
         right: 1em;
     }
 
-    td .submit {
+    .inputs div .submit {
         display: flex;
         justify-content: center;
         justify-items: center;
@@ -149,12 +164,22 @@
         width: 250px;
     }
 
-    input {
-        width: 100%;
+    .inputs {
+        display: flex;
+        width: 250px;
     }
 
-    input[type=number] {
-        width: 4em;
-        padding-left: .75em;
+    .inputs div {
+        margin-right: .5em;
+    }
+
+    .qty {
+        width: 50px;
+    }
+    .type {
+        width: 125px;
+    }
+    .size {
+        width: 50px;
     }
 </style>
