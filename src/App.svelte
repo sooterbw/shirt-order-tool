@@ -21,8 +21,10 @@
 	</div>
 	{#if selectedForm}
 	<div class="main-container">
-		<div class="span-1"><NewOrder /></div>
-		<div class="span-1"><OrderOverview /></div>
+		<div class="flex-row">
+			<div class="span-1"><NewOrder /></div>
+			<div class="span-1"><OrderOverview /></div>
+		</div>
 		<div class="span-2"><OrderTable /></div>
 	</div>
 	{/if}
@@ -36,21 +38,22 @@
 	}
 
 	.main-container {
-		display: grid;
-		grid-template-columns: 50% 50%;
-		grid-auto-flow: row;
+		display: flex;
 		flex-direction: column;
 		height: 100%;
 		width: 100%;
 	}
 
-	.span-1 {
-		height: 50vh;
+	.flex-row {
+		display: flex;
+		min-height: 50vh;
+	}
+
+	.flex-row div {
 		width: 100%;
 	}
 
 	.span-2 {
-		height: 50vh;
 		grid-column: span 2;
 	}
 </style>
