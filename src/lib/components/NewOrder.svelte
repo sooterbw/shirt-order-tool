@@ -13,22 +13,32 @@
 		selectedForm = $formData.forms.filter((form) => {
 			return form.active == true;
 		})[0]
+
+        console.log(total)
 	}
 
     function addRow(row) {
+        let push = true;
         if(row.size && row.quantity && row.type) {
             for(let i = 0; i < $formData.options.types.length; i ++) {
                 if ($formData.options.types[i].name == row.type) {
                     total += $formData.options.types[i].price
-                    if (row.size = 'AXXL') {
+                    if (row.size == 'AXXL') {
                         total += 2
                     } else if (row.size == 'AXXXL') {
                         total += 4
                     }
                 }
             }
-            order.push(row)
-            console.log(order)
+            for (let i = 0; i<order.length; i++) {
+                if (row.type == order[i].type && row.size == order[i].size) {
+                    push = false;
+                    order[i].quantity += row.quantity
+                }
+            }
+            if (push) {
+                order.push(row)
+            }
             order = order
             orderRow = {};
             errMsg = ''
@@ -38,14 +48,17 @@
     }
 
     function handleSubmit() {
-        $formData[selectedForm]
-        updateFormData($formData)
+        // $formData[selectedForm]
+        // updateFormData($formData)
     }
 </script>
 
 <div class="cell">
     <div class="heading">
         <h3>New Order</h3>
+    </div>
+    <div class="total">
+        {total}
     </div>
     <form on:submit|preventDefault={handleSubmit}>
         <div class="form-field">
@@ -133,6 +146,12 @@
 
     .type {
         width: 60%;
+    }
+
+    .total {
+        position: absolute;
+        top: 20px;
+        right: 20px;
     }
 
     th, td {
