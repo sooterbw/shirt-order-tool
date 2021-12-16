@@ -16,14 +16,12 @@
 </script>
 
 <main>
-	<div>
-		<FormList />
-	</div>
+	<FormList />
 	{#if selectedForm}
 	<div class="main-container">
 		<div class="flex-row">
-			<div class="span-1"><NewOrder /></div>
 			<div class="span-1"><OrderOverview /></div>
+			<div class="span-1"><NewOrder /></div>
 		</div>
 		<div class="span-2"><OrderTable /></div>
 	</div>
@@ -35,6 +33,7 @@
 		position: relative;
 		display: flex;
 		max-height: 100vh;
+		overflow-y: scroll;
 	}
 
 	.main-container {

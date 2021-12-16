@@ -24,9 +24,11 @@ let exampleForm = {
     "forms": [
         {
             "name": "Example Form",
+            "paid": false,
             "orders": [
                 {
                     "name": "John Doe",
+                    "subtotal": 54,
                     "order": [
                         {
                             "quantity": 1,
@@ -42,6 +44,8 @@ let exampleForm = {
                 },
                 {
                     "name": "Jill Johnson",
+                    "paid": false,
+                    "subtotal": 72,
                     "order": [
                         {
                             "quantity": 1,
@@ -50,7 +54,7 @@ let exampleForm = {
                         },
                         {
                             "quantity": 2,
-                            "type": "Long Sleeve",
+                            "type": "Short Sleeve",
                             "size": "AL"
                         },
                         {
@@ -88,5 +92,4 @@ export function updateFormData(data) {
             console.error("error: " + error)
         }
     })
-    console.log('updated')
 }

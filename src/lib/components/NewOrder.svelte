@@ -13,8 +13,6 @@
 		selectedForm = $formData.forms.filter((form) => {
 			return form.active == true;
 		})[0]
-
-        console.log(total)
 	}
 
     function addRow(row) {
@@ -45,22 +43,34 @@
         } else {
             errMsg = 'Fill out all fields'
         }
+        console.log($formData.forms[$formData.forms.indexOf(selectedForm)])
     }
 
     function handleSubmit() {
-        // $formData[selectedForm]
-        // updateFormData($formData)
+        let push = true;
+        let form = $formData.forms[$formData.forms.indexOf(selectedForm)];
+        // add new order
+        $formData.forms[$formData.forms.indexOf(selectedForm)].orders.push({
+            name: name,
+            subtotal: total,
+            order: order
+        })
+        $formData = $formData
+        updateFormData($formData)
+        order = []
+        total = 0
+        name = ''
     }
 </script>
 
 <div class="cell">
-    <div class="heading">
-        <h3>New Order</h3>
-    </div>
-    <div class="total">
-        {total}
-    </div>
     <form on:submit|preventDefault={handleSubmit}>
+        <div class="heading">
+            <h3>New Order</h3>
+            <div class="total">
+                Total: ${total}
+            </div>        
+        </div>
         <div class="form-field">
             <label for="">Customer Name</label>
             <input type="text" bind:value={name} required>
@@ -128,12 +138,14 @@
 </div>
 
 <style>
-    h3 {
+    h3, .total {
         margin: .5em 0 .5em 0;
     }
 
     .table-container {
+        min-width: 450px;
         margin-top: 20px;
+        overflow: hidden;
     }
 
     .qty {
@@ -149,15 +161,23 @@
     }
 
     .total {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+        font-size: 18px;
+    }
+
+    table {
+        border-color: transparent;
+        border-spacing: 0;
+        width: 100%;
+    }
+
+    thead {
+        background-color: rgb(243 244 246);
     }
 
     th, td {
         text-align: left;
         padding-left: 10px;
-        height: 1em;
+        height: 2em;
     }
 
     input, select {
@@ -199,15 +219,18 @@
         flex-direction: column;
         align-items: center;
         padding: 2em;
-        margin: 1em 1em 1em 2em;
+        margin: 1em 2em 1em 1em;
         height: calc(100% - 6em);
         background-color: rgb(209, 213, 219);
         border-radius: 10px;
+        filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
     }
 
     .heading {
+        display: flex;
+        justify-content: space-between;
         align-self: flex-start;
-        width: 250px;
+        width: 100%;
     }
 
     .add {

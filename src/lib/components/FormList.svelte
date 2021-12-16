@@ -33,7 +33,7 @@
 <div class="modal-container">
     <form on:submit|preventDefault="{() => createForm(formName)}">
         <label for="name">Form Name</label>
-        <input bind:value="{formName}" type="text" placeholder="Enter name of the form">
+        <input class="new-form" bind:value="{formName}" type="text" placeholder="Enter name of the form">
         <div class="form-buttons">
             <button type="reset" on:click="{() => isModal = false}">Cancel</button>
             <button type="submit" class="submit-form-button">Create</button>
@@ -87,6 +87,11 @@
 
     label {
         font-weight: 500;
+    }
+
+    .new-form {
+        filter: drop-shadow(0 1px 2px rgb(0 0 0 / 0.1)) drop-shadow(0 1px 1px rgb(0 0 0 / 0.06));
+        height: 3em;
     }
 
     .new-form-button {
