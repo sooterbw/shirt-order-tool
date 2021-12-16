@@ -20,11 +20,11 @@
         if(row.size && row.quantity && row.type) {
             for(let i = 0; i < $formData.options.types.length; i ++) {
                 if ($formData.options.types[i].name == row.type) {
-                    total += $formData.options.types[i].price
+                    total += ($formData.options.types[i].price * row.quantity)
                     if (row.size == 'AXXL') {
-                        total += 2
+                        total += (2 * row.quantity)
                     } else if (row.size == 'AXXXL') {
-                        total += 4
+                        total += (4 * row.quantity)
                     }
                 }
             }
