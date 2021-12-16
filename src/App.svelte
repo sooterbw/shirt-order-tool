@@ -16,7 +16,9 @@
 </script>
 
 <main>
-	<FormList />
+	<div>
+		<FormList />
+	</div>
 	{#if selectedForm}
 	<div class="main-container">
 		<div class="flex-row">

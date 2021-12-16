@@ -10,7 +10,7 @@ app.on("ready", () => {
           contextIsolation: false,
           enableRemoteModule: true
       },
-      icon:'./shirt.png'
+      icon:'./icon.png'
   }
   );
   window.loadFile(path.join(__dirname, "public/index.html"));
