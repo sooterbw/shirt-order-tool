@@ -43,6 +43,7 @@
                 <th class="first-th" colspan="9">{type.name}</th>
                 {/each}
                 <th colspan="1"></th>
+                <th colspan="1"></th>
             </tr>
             <tr>
                 <th colspan="1">name</th>
@@ -53,6 +54,7 @@
                 {#each sizes as size}
                 <th colspan="1">{size}</th>
                 {/each}
+                <th colspan="1">subtotal</th>
                 <th colspan="1"></th>
             </tr>
         </thead>
@@ -78,6 +80,7 @@
                     {/if}
                     {/each}
                 {/each}
+                <td>${order.subtotal}</td>
                 <td>
                     <div on:click="{() => deleteOrder(order)}" class="delete">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

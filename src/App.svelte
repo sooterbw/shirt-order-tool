@@ -27,6 +27,12 @@
 		</div>
 		<div class="span-2"><OrderTable /></div>
 	</div>
+	{:else}
+	<div class="none-selected">
+		<h1>Select a Form</h1>
+		<h1>or</h1>
+		<h1>Create a New One</h1>
+	</div>
 	{/if}
 </main>
 
@@ -39,10 +45,21 @@
 	}
 
 	.main-container {
+		padding-top: 1em;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
 		width: 100%;
+	}
+
+	.none-selected {
+		height: 100%;
+		widows: 100%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.flex-row {

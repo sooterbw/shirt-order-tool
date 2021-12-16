@@ -47,8 +47,6 @@
     }
 
     function handleSubmit() {
-        let push = true;
-        let form = $formData.forms[$formData.forms.indexOf(selectedForm)];
         // add new order
         $formData.forms[$formData.forms.indexOf(selectedForm)].orders.push({
             name: name,
@@ -61,10 +59,16 @@
         total = 0
         name = ''
     }
+
+    function handleClear() {
+        order = []
+        total = 0
+        name = ''
+    }
 </script>
 
 <div class="cell">
-    <form on:submit|preventDefault={handleSubmit}>
+    <form on:reset|preventDefault="{handleClear}" on:submit|preventDefault={handleSubmit}>
         <div class="heading">
             <h3>New Order</h3>
             <div class="total">
@@ -130,10 +134,14 @@
         {#if errMsg}
         <p class="error">{errMsg}</p>
         {/if}
-
-        <button class="submit">
-            Create Order
-        </button>
+        <div class="form-buttons">
+            <button type="reset" class="reset">
+                Clear All
+            </button>
+            <button type="submit" class="submit">
+                Create Order
+            </button>
+        </div>
     </form>
 </div>
 
@@ -197,6 +205,21 @@
         width: 100%;
     }
 
+    .form-buttons {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .reset {
+        background-color: rgb(148 163 184);
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    .reset:hover {
+        background-color: rgb(174, 183, 194);
+    }
+
     .table-container {
         background-color: white;
         border-radius: 10px;
@@ -244,7 +267,7 @@
         background-color: rgba(91, 33, 182);
     }
 
-    .submit {
+    .submit, .reset {
         height: 42px;
         margin-top: 20px;
     }
